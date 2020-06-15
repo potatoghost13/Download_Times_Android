@@ -7,7 +7,6 @@ import android.widget.Button
 import android.widget.Spinner
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import org.w3c.dom.Text
 
 class MainActivity : AppCompatActivity() {
 
@@ -23,56 +22,75 @@ class MainActivity : AppCompatActivity() {
         val userSpeedText: TextView = findViewById(R.id.userSpeed)
         val userCalcBtn: Button = findViewById(R.id.userCalculate)
 
-        //Variables Required
-        var speedUnitSelected: String
-        var sizeUnitSelected: String
-
         //Create the Speed Spinner
         val speedSpinner: Spinner = findViewById(R.id.userSpeedUnits)
-        if (speedSpinner != null) {
-            ArrayAdapter.createFromResource(
-                this,
-                R.array.speedUnits,
-                android.R.layout.simple_spinner_item
-            ).also { adapter ->
-                adapter.setDropDownViewResource(android.R.layout.simple_spinner_item)
-                speedSpinner.adapter = adapter
-            }
+        ArrayAdapter.createFromResource(
+            this,
+            R.array.speedUnits,
+            android.R.layout.simple_spinner_item
+        ).also { adapter ->
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_item)
+            speedSpinner.adapter = adapter
         }
-        speedUnitSelected = speedSpinner.selectedItem.toString()
-        Log.d("Check_1", "Speed Unit Selected is:  $speedUnitSelected")
 
         //Create the Size Spinner
         val sizeSpinner: Spinner = findViewById(R.id.userSizeUnits)
-        if (sizeSpinner != null) {
-            ArrayAdapter.createFromResource(
-                this,
-                R.array.sizeUnits,
-                android.R.layout.simple_spinner_item
-            ).also { adapter ->
-                adapter.setDropDownViewResource(android.R.layout.simple_spinner_item)
-                sizeSpinner.adapter = adapter
+        ArrayAdapter.createFromResource(
+            this,
+            R.array.sizeUnits,
+            android.R.layout.simple_spinner_item
+        ).also { adapter ->
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_item)
+            sizeSpinner.adapter = adapter
+        }
+
+
+        userCalcBtn.setOnClickListener {
+            val speedUnitSelected = speedSpinner.selectedItem.toString()
+            val sizeUnitSelected = sizeSpinner.selectedItem.toString()
+            val userSize = (userSizeText.text.toString()).toInt()
+            val userSpeed = (userSpeedText.text.toString()).toInt()
+            Log.d("Btn", "The Calculate Button was Pressed.")
+            Log.d("Btn", "Speed: $userSpeed $speedUnitSelected, Size: $userSize $sizeUnitSelected")
+
+            val timeInSeconds = main(
+                userSpeed = userSpeed,
+                userSpeedUnit = speedUnitSelected,
+                userSize = userSize,
+                userSizeUnit = sizeUnitSelected
+            )
+
+            //Output
+            //Years
+            if (timeInSeconds >= 3.15E7) {
+                outputHoursText.text = R.string.duration_over_a_year_L1.toString()
+                outputMinutesText.text = R.string.duration_over_a_year_L2.toString()
+                outputSecondsText.text = R.string.duration_over_a_year_L3.toString()
+            } else {
+
+                //Hours
+                val doubleHours: Double = (timeInSeconds.toDouble() / 3600)
+                val hours = doubleHours.toInt()
+                //Minutes
+                val doubleMinutes: Double = ((timeInSeconds.toDouble() / 3600) - hours) * 60
+                val minutes = doubleMinutes.toInt()
+                //Seconds
+                val doubleSeconds: Double = (doubleMinutes - minutes) * 60
+                val seconds = doubleSeconds.toInt()
+
+                //OutPut
+                outputHoursText.text = "$hours Hours,"
+                outputMinutesText.text = "$minutes Minutes,"
+                outputSecondsText.text = "$seconds Seconds."
             }
         }
-        sizeUnitSelected = sizeSpinner.selectedItem.toString()
-        Log.d("Check_2", "Speed Unit Selected is:  $sizeUnitSelected")
     }
 }
 
-fun main(userSpeed: Int, userSpeedUnit: String, userSize: Int, userSizeUnit: String) {
-    //User Inputs
-    var userSpeed = userSpeed           //7
-    var userSpeedUnit = userSpeedUnit   //"MB/s"
-    var userSize = userSize             //45
-    var userSizeUnit = userSizeUnit     //"GB"
+fun main(userSpeed: Int, userSpeedUnit: String, userSize: Int, userSizeUnit: String): Long {
 
-    //Call Calc Function
-    val tempTimeInSeconds: Long = calc(userSize, userSpeed, userSpeedUnit, userSizeUnit)
-
-    //Print OutPut
-    timeOutput(tempTimeInSeconds)
-    println("NOTE: Times shown are Approximate")
-
+    //Return Output of Calc Function
+    return calc(userSize, userSpeed, userSpeedUnit, userSizeUnit)
 }
 
 //Function Used to Convert the Size or Speed into Bytes

@@ -6,6 +6,9 @@
     <string name="calculate_the_duration">Calculate!</string>
     <string name="enter_the_file_size">File Size</string>
     <string name="enter_download_speed">Download Speed</string>
+    <string name="duration_over_a_year_L1">The Duration</string>
+    <string name="duration_over_a_year_L2">is over a</string>
+    <string name="duration_over_a_year_L3">year long!!</string>
 
     <string-array name="sizeUnits">
         <item>TB</item>
