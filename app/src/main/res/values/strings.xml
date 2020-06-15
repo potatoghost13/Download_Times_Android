@@ -1,0 +1,33 @@
+<resources>
+    <string name="app_name">Download_Times</string>
+    <string name="select_speed">Enter Download Speed:</string>
+    <string name="select_size">Enter File Size:</string>
+    <string name="duration">Duration:</string>
+    <string name="calculate_the_duration">Calculate!</string>
+    <string name="enter_the_file_size">File Size</string>
+    <string name="enter_download_speed">Download Speed</string>
+
+    <string-array name="sizeUnits">
+        <item>TB</item>
+        <item>GB</item>
+        <item>MB</item>
+        <item>KB</item>
+        <item>B</item>
+    </string-array>
+
+    <string-array name="speedUnits">
+        <item>TB/s</item>
+        <item>GB/s</item>
+        <item>MB/s</item>
+        <item>KB/s</item>
+        <item>B/s</item>
+    </string-array>
+
+    <string-array name="speedUnits_Alt">
+        <item>Tbps</item>
+        <item>Gbps</item>
+        <item>Mbps</item>
+        <item>Kbps</item>
+        <item>bps</item>
+    </string-array>
+</resources>
