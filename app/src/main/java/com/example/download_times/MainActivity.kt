@@ -78,6 +78,10 @@ class MainActivity : AppCompatActivity() {
     }
 }
 
+//Todo: Move TextView Checking to a function
+//Todo: Fix Layout but as a last Priority
+
+//Function Used to Create the Spinners
 fun createSpinner(activity:Activity, arrayId:Int, passingSpinner:Spinner ):Spinner{
     //Create the Size Spinner
     val tempSpinner: Spinner = passingSpinner
