@@ -1,5 +1,6 @@
 package com.example.download_times
 
+import android.app.Activity
 import android.os.Bundle
 import android.util.Log
 import android.widget.ArrayAdapter
@@ -23,42 +24,32 @@ class MainActivity : AppCompatActivity() {
         val userCalcBtn: Button = findViewById(R.id.userCalculate)
 
         //Create the Speed Spinner
-        val speedSpinner: Spinner = findViewById(R.id.userSpeedUnits)
-        ArrayAdapter.createFromResource(
-            this,
-            R.array.speedUnits,
-            android.R.layout.simple_spinner_item
-        ).also { adapter ->
-            adapter.setDropDownViewResource(android.R.layout.simple_spinner_item)
-            speedSpinner.adapter = adapter
-        }
+        val speedSpinnerTemp: Spinner = findViewById(R.id.userSpeedUnits)
+        val speedSpinner = createSpinner(this, R.array.speedUnits, speedSpinnerTemp)
 
         //Create the Size Spinner
-        val sizeSpinner: Spinner = findViewById(R.id.userSizeUnits)
-        ArrayAdapter.createFromResource(
-            this,
-            R.array.sizeUnits,
-            android.R.layout.simple_spinner_item
-        ).also { adapter ->
-            adapter.setDropDownViewResource(android.R.layout.simple_spinner_item)
-            sizeSpinner.adapter = adapter
-        }
+        val sizeSpinnerTemp: Spinner = findViewById(R.id.userSizeUnits)
+        val sizeSpinner = createSpinner(this, R.array.sizeUnits, sizeSpinnerTemp)
 
-
+        //Calculate Button.
         userCalcBtn.setOnClickListener {
             val speedUnitSelected = speedSpinner.selectedItem.toString()
             val sizeUnitSelected = sizeSpinner.selectedItem.toString()
-            val userSize = (userSizeText.text.toString()).toInt()
-            val userSpeed = (userSpeedText.text.toString()).toInt()
+            //Check the TextViews are Populated
+            val userSize: Int = if (userSizeText.text.toString() == "") {
+                10
+            }else {
+                (userSizeText.text.toString()).toInt()
+            }
+            val userSpeed: Int = if (userSpeedText.text.toString() == "") {
+                10
+            }else {
+                (userSpeedText.text.toString()).toInt()
+            }
             Log.d("Btn", "The Calculate Button was Pressed.")
             Log.d("Btn", "Speed: $userSpeed $speedUnitSelected, Size: $userSize $sizeUnitSelected")
 
-            val timeInSeconds = main(
-                userSpeed = userSpeed,
-                userSpeedUnit = speedUnitSelected,
-                userSize = userSize,
-                userSizeUnit = sizeUnitSelected
-            )
+            val timeInSeconds = calc(speed = userSpeed,speedUnit = speedUnitSelected,size = userSize,sizeUnit = sizeUnitSelected)
 
             //Output
             //Years
@@ -79,18 +70,26 @@ class MainActivity : AppCompatActivity() {
                 val seconds = doubleSeconds.toInt()
 
                 //OutPut
-                outputHoursText.text = "$hours Hours,"
-                outputMinutesText.text = "$minutes Minutes,"
-                outputSecondsText.text = "$seconds Seconds."
+                outputHoursText.text = "$hours ${R.string.str_Hours},"
+                outputMinutesText.text = "$minutes ${R.string.str_Minutes},"
+                outputSecondsText.text = "$seconds ${R.string.str_Seconds}"
             }
         }
     }
 }
 
-fun main(userSpeed: Int, userSpeedUnit: String, userSize: Int, userSizeUnit: String): Long {
-
-    //Return Output of Calc Function
-    return calc(userSize, userSpeed, userSpeedUnit, userSizeUnit)
+fun createSpinner(activity:Activity, arrayId:Int, passingSpinner:Spinner ):Spinner{
+    //Create the Size Spinner
+    val tempSpinner: Spinner = passingSpinner
+    ArrayAdapter.createFromResource(
+        activity,
+        arrayId,
+        android.R.layout.simple_spinner_item
+    ).also { adapter ->
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_item)
+        tempSpinner.adapter = adapter
+    }
+    return tempSpinner
 }
 
 //Function Used to Convert the Size or Speed into Bytes

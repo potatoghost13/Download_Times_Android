@@ -9,6 +9,10 @@
     <string name="duration_over_a_year_L1">The Duration</string>
     <string name="duration_over_a_year_L2">is over a</string>
     <string name="duration_over_a_year_L3">year long!!</string>
+    <string name="str_Hours">Hours</string>
+    <string name="str_Minutes">Minutes</string>
+    <string name="str_Seconds">Seconds</string>
+
 
     <string-array name="sizeUnits">
         <item>TB</item>
