@@ -35,22 +35,18 @@ class MainActivity : AppCompatActivity() {
 
         //Calculate Button.
         userCalcBtn.setOnClickListener {
+            //Pull the User Selected Units to be used within the Code.
             val speedUnitSelected = speedSpinner.selectedItem.toString()
             val sizeUnitSelected = sizeSpinner.selectedItem.toString()
-            //Check the TextViews are Populated
 
+            //Check the TextViews are Populated
             val userSize = checkUserInput(this, userSizeText, defaultValue)
             val userSpeed = checkUserInput(this, userSpeedText, defaultValue)
 
             Log.d("Btn", "The Calculate Button was Pressed.")
             Log.d("Btn", "Speed: $userSpeed $speedUnitSelected, Size: $userSize $sizeUnitSelected")
 
-            val timeInSeconds = calc(
-                speed = userSpeed,
-                speedUnit = speedUnitSelected,
-                size = userSize,
-                sizeUnit = sizeUnitSelected
-            )
+            val timeInSeconds = calc(userSize, sizeUnitSelected, userSpeed, speedUnitSelected)
             Log.d("Btn", "Time in Seconds: $timeInSeconds")
 
             //Output
@@ -139,7 +135,7 @@ fun unitConversion(unit: String): Long {
 }
 
 //Function to actually Calculate the Time in Seconds.
-fun calc(size: Int, speed: Int, speedUnit: String, sizeUnit: String): Long {
+fun calc(size: Int, sizeUnit: String, speed: Int, speedUnit: String): Long {
 
     val speedCalc: Long = speed * unitConversion(speedUnit)
     val sizeCalc: Long = size * unitConversion(sizeUnit)
