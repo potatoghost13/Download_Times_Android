@@ -3,10 +3,7 @@ package com.example.download_times
 import android.app.Activity
 import android.os.Bundle
 import android.util.Log
-import android.widget.ArrayAdapter
-import android.widget.Button
-import android.widget.Spinner
-import android.widget.TextView
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 
 class MainActivity : AppCompatActivity() {
@@ -15,12 +12,17 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        //SetupVariables
+        val defaultValue = 1
+
         //Setup UI with Ids.
         val outputHoursText: TextView = findViewById(R.id.outputHours)
         val outputMinutesText: TextView = findViewById(R.id.outputMinutes)
         val outputSecondsText: TextView = findViewById(R.id.outputSeconds)
         val userSizeText: TextView = findViewById(R.id.userSize)
+        userSizeText.text = defaultValue.toString()
         val userSpeedText: TextView = findViewById(R.id.userSpeed)
+        userSpeedText.text = defaultValue.toString()
         val userCalcBtn: Button = findViewById(R.id.userCalculate)
 
         //Create the Speed Spinner
@@ -36,29 +38,28 @@ class MainActivity : AppCompatActivity() {
             val speedUnitSelected = speedSpinner.selectedItem.toString()
             val sizeUnitSelected = sizeSpinner.selectedItem.toString()
             //Check the TextViews are Populated
-            val userSize: Int = if (userSizeText.text.toString() == "") {
-                10
-            }else {
-                (userSizeText.text.toString()).toInt()
-            }
-            val userSpeed: Int = if (userSpeedText.text.toString() == "") {
-                10
-            }else {
-                (userSpeedText.text.toString()).toInt()
-            }
+
+            val userSize = checkUserInput(this, userSizeText, defaultValue)
+            val userSpeed = checkUserInput(this, userSpeedText, defaultValue)
+
             Log.d("Btn", "The Calculate Button was Pressed.")
             Log.d("Btn", "Speed: $userSpeed $speedUnitSelected, Size: $userSize $sizeUnitSelected")
 
-            val timeInSeconds = calc(speed = userSpeed,speedUnit = speedUnitSelected,size = userSize,sizeUnit = sizeUnitSelected)
+            val timeInSeconds = calc(
+                speed = userSpeed,
+                speedUnit = speedUnitSelected,
+                size = userSize,
+                sizeUnit = sizeUnitSelected
+            )
+            Log.d("Btn", "Time in Seconds: $timeInSeconds")
 
             //Output
             //Years
             if (timeInSeconds >= 3.15E7) {
-                outputHoursText.text = R.string.duration_over_a_year_L1.toString()
-                outputMinutesText.text = R.string.duration_over_a_year_L2.toString()
-                outputSecondsText.text = R.string.duration_over_a_year_L3.toString()
+                outputHoursText.text = getString(R.string.duration_over_a_year_L1)
+                outputMinutesText.text = getString(R.string.duration_over_a_year_L2)
+                outputSecondsText.text = getString(R.string.duration_over_a_year_L3)
             } else {
-
                 //Hours
                 val doubleHours: Double = (timeInSeconds.toDouble() / 3600)
                 val hours = doubleHours.toInt()
@@ -70,19 +71,39 @@ class MainActivity : AppCompatActivity() {
                 val seconds = doubleSeconds.toInt()
 
                 //OutPut
-                outputHoursText.text = "$hours ${R.string.str_Hours},"
-                outputMinutesText.text = "$minutes ${R.string.str_Minutes},"
-                outputSecondsText.text = "$seconds ${R.string.str_Seconds}"
+                outputHoursText.text = "$hours ${getString(R.string.str_Hours)},"
+                outputMinutesText.text = "$minutes ${getString(R.string.str_Minutes)},"
+                outputSecondsText.text = "$seconds ${getString(R.string.str_Seconds)}."
             }
         }
     }
 }
 
-//Todo: Move TextView Checking to a function
 //Todo: Fix Layout but as a last Priority
 
+// Function To Convert User Input to Int.
+fun checkUserInput(activity: Activity, textView: TextView, defaultValue: Int): Int {
+    var tempValue: Int
+    try {
+        tempValue = (textView.text.toString()).toInt()
+
+    } catch (e: NumberFormatException) {
+        Toast.makeText(activity, "Please Enter a Number", Toast.LENGTH_LONG).show()
+        textView.text = defaultValue.toString()
+        tempValue = defaultValue
+    }
+
+    if (tempValue <= 0) {
+        Toast.makeText(activity, "Value Must be Greater than Zero", Toast.LENGTH_SHORT).show()
+        textView.text = defaultValue.toString()
+        tempValue = defaultValue
+    }
+
+    return tempValue
+}
+
 //Function Used to Create the Spinners
-fun createSpinner(activity:Activity, arrayId:Int, passingSpinner:Spinner ):Spinner{
+fun createSpinner(activity: Activity, arrayId: Int, passingSpinner: Spinner): Spinner {
     //Create the Size Spinner
     val tempSpinner: Spinner = passingSpinner
     ArrayAdapter.createFromResource(
@@ -124,31 +145,7 @@ fun calc(size: Int, speed: Int, speedUnit: String, sizeUnit: String): Long {
     val sizeCalc: Long = size * unitConversion(sizeUnit)
     val timeInSeconds = sizeCalc / speedCalc
 
-    println("Speed is $speed $speedUnit and the Size is $size $sizeUnit")
+    Log.d("Btn", "Speed is $speed $speedUnit and the Size is $size $sizeUnit")
     return timeInSeconds
-}
-
-//Function to Output the Time
-fun timeOutput(timeInSeconds: Long): Boolean {
-
-    //Years
-    if (timeInSeconds >= 3.15E7) {
-        println("The Duration is over a year long")
-        return true
-    }
-
-    //Hours
-    val doubleHours: Double = (timeInSeconds.toDouble() / 3600)
-    val hours = doubleHours.toInt()
-    //Minutes
-    val doubleMinutes: Double = ((timeInSeconds.toDouble() / 3600) - hours) * 60
-    val minutes = doubleMinutes.toInt()
-    //Seconds
-    val doubleSeconds: Double = (doubleMinutes - minutes) * 60
-    val seconds = doubleSeconds.toInt()
-
-    //OutPut
-    println("The Duration is $hours Hours, $minutes Minutes, $seconds Seconds")
-    return true
 }
 
