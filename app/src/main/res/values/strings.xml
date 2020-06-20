@@ -12,7 +12,9 @@
     <string name="str_Hours">Hours</string>
     <string name="str_Minutes">Minutes</string>
     <string name="str_Seconds">Seconds</string>
-
+    <string name="outputHours">outputHours</string>
+    <string name="outputMinutes">outputMinutes</string>
+    <string name="outputSeconds">outputSeconds</string>
 
     <string-array name="sizeUnits">
         <item>TB</item>

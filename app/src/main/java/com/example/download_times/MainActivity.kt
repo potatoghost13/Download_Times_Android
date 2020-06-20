@@ -67,7 +67,7 @@ class MainActivity : AppCompatActivity() {
                 val seconds = doubleSeconds.toInt()
 
                 //OutPut
-                outputHoursText.text = "$hours ${getString(R.string.str_Hours)},"
+                outputHoursText.text = "$hours ${getString(R.string.str_Hours)}, \n $minutes ${getString(R.string.str_Minutes)}"
                 outputMinutesText.text = "$minutes ${getString(R.string.str_Minutes)},"
                 outputSecondsText.text = "$seconds ${getString(R.string.str_Seconds)}."
             }
@@ -76,6 +76,8 @@ class MainActivity : AppCompatActivity() {
 }
 
 //Todo: Fix Layout but as a last Priority
+//Todo: Improve Layout
+//Todo: Correct Output Text function. Remove the three separate fields
 
 // Function To Convert User Input to Int.
 fun checkUserInput(activity: Activity, textView: TextView, defaultValue: Int): Int {
