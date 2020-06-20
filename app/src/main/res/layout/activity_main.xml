@@ -7,152 +7,219 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <TextView
-        android:id="@+id/UserSpeed"
+
+    <ScrollView
+        android:id="@+id/scrollView2"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:gravity="center_horizontal"
-        android:maxWidth="100dip"
-        android:singleLine="false"
-        android:text="@string/select_speed"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="@+id/userSpeed"
-        app:layout_constraintEnd_toStartOf="@+id/userSpeed"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/userSpeed" />
-
-    <TextView
-        android:id="@+id/UserSize"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:gravity="center_horizontal"
-        android:maxWidth="100dip"
-        android:text="@string/select_size"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="@+id/userSize"
-        app:layout_constraintEnd_toStartOf="@+id/userSize"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/userSize" />
-
-    <TextView
-        android:id="@+id/textDuration"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginRight="32dp"
-        android:text="@string/duration"
-        android:textSize="24sp"
-        app:layout_constraintEnd_toStartOf="@+id/userCalculate"
-        app:layout_constraintTop_toBottomOf="@+id/userCalculate" />
-
-    <TextView
-        android:id="@+id/outputHours"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
-        android:text="outputHours"
-        android:textSize="24sp"
+        android:layout_height="0dp"
+        android:background="@color/background"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/userCalculate" />
+        app:layout_constraintTop_toTopOf="parent">
 
-    <TextView
-        android:id="@+id/outputMinutes"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="16dp"
-        android:text="outputMinutes"
-        android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="@+id/outputHours"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="@+id/outputHours"
-        app:layout_constraintTop_toBottomOf="@+id/outputHours" />
+        <LinearLayout
+            android:id="@+id/scrollLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/outputSeconds"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="16dp"
-        android:text="outputSeconds"
-        android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="@+id/outputMinutes"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="@+id/outputMinutes"
-        app:layout_constraintTop_toBottomOf="@+id/outputMinutes" />
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:text="@string/app_name"
+                android:textColor="@color/colorPrimary"
+                android:textSize="36sp" />
 
-    <Spinner
-        android:id="@+id/userSizeUnits"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/userSizeLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="4dp"
+                android:background="@color/tileBackground"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="@+id/userSize"
+                app:layout_constraintTop_toBottomOf="@+id/userSize">
 
-    <Spinner
-        android:id="@+id/userSpeedUnits"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="80dp"
-        app:layout_constraintEnd_toEndOf="@+id/userSizeUnits"
-        app:layout_constraintStart_toStartOf="@+id/userSizeUnits"
-        app:layout_constraintTop_toBottomOf="@+id/userSizeUnits" />
+                <EditText
+                    android:id="@+id/userSize"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginRight="8dp"
+                    android:layout_marginBottom="16dp"
+                    android:autofillHints="100"
+                    android:ems="6"
+                    android:hint="@string/enter_the_file_size"
+                    android:inputType="number"
+                    android:maxLength="10"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/userSizeUnits"
+                    app:layout_constraintStart_toEndOf="@+id/UserSize"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="1.0"
+                    tools:layout_conversion_absoluteHeight="45dp"
+                    tools:layout_conversion_absoluteWidth="100dp" />
 
-    <Button
-        android:id="@+id/userCalculate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        android:text="@string/calculate_the_duration"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/userSpeed" />
+                <TextView
+                    android:id="@+id/UserSize"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginRight="8dp"
+                    android:gravity="center_horizontal"
+                    android:text="@string/select_size"
+                    android:textSize="18sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/userSize"
+                    app:layout_constraintEnd_toStartOf="@+id/userSize"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/userSize"
+                    tools:layout_conversion_absoluteHeight="44dp"
+                    tools:layout_conversion_absoluteWidth="100dp" />
 
-    <EditText
-        android:id="@+id/userSize"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
-        android:autofillHints="100"
-        android:ems="6"
-        android:hint="@string/enter_the_file_size"
-        android:inputType="number"
-        android:maxLength="10"
-        app:layout_constraintBottom_toBottomOf="@+id/userSizeUnits"
-        app:layout_constraintEnd_toStartOf="@+id/userSizeUnits"
-        app:layout_constraintTop_toTopOf="@+id/userSizeUnits" />
+                <Spinner
+                    android:id="@+id/userSizeUnits"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginRight="16dp"
+                    android:scaleX="1.2"
+                    android:scaleY="1.2"
+                    app:layout_constraintBottom_toBottomOf="@+id/userSize"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/userSize"
+                    tools:layout_conversion_absoluteHeight="0dp"
+                    tools:layout_conversion_absoluteWidth="48dp" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <EditText
-        android:id="@+id/userSpeed"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
-        android:autofillHints="100"
-        android:ems="6"
-        android:hint="@string/enter_download_speed"
-        android:inputType="number"
-        android:maxLength="10"
-        app:layout_constraintBottom_toBottomOf="@+id/userSpeedUnits"
-        app:layout_constraintEnd_toStartOf="@+id/userSpeedUnits"
-        app:layout_constraintTop_toTopOf="@+id/userSpeedUnits" />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/UserSpeedLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="8dp"
+                android:layout_marginVertical="4dp"
+                android:background="@color/tileBackground"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent">
+
+                <EditText
+                    android:id="@+id/userSpeed"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginRight="8dp"
+                    android:layout_marginBottom="16dp"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    android:autofillHints="100"
+                    android:ems="6"
+                    android:hint="@string/enter_download_speed"
+                    android:inputType="number"
+                    android:maxLength="10"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/userSpeedUnits"
+                    app:layout_constraintStart_toEndOf="@+id/UserSpeed"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <Spinner
+                    android:id="@+id/userSpeedUnits"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginRight="16dp"
+                    android:scaleX="1.2"
+                    android:scaleY="1.2"
+                    app:layout_constraintBottom_toBottomOf="@+id/userSpeed"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/userSpeed" />
+
+                <TextView
+                    android:id="@+id/UserSpeed"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginRight="8dp"
+                    android:gravity="center_horizontal"
+                    android:text="@string/select_speed"
+                    android:textSize="18sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/userSpeed"
+                    app:layout_constraintEnd_toStartOf="@+id/userSpeed"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/userSpeed" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/buttonLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <Button
+                    android:id="@+id/userCalculate"
+                    android:layout_width="150dp"
+                    android:layout_height="60dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:text="@string/calculate_the_duration"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/durationLayout"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_margin="8dp"
+                android:layout_weight="1"
+                android:background="@color/tileBackground"
+                tools:layout_editor_absoluteY="223dp">
+
+                <TextView
+                    android:id="@+id/textDuration"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/duration"
+                    android:textSize="24sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/outputText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:gravity="center_horizontal"
+                    android:text="@string/outputText"
+                    android:textSize="24sp"
+                    android:visibility="invisible"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textDuration" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </LinearLayout>
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

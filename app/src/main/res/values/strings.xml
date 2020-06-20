@@ -6,13 +6,13 @@
     <string name="calculate_the_duration">Calculate!</string>
     <string name="enter_the_file_size">File Size</string>
     <string name="enter_download_speed">Download Speed</string>
-    <string name="duration_over_a_year_L1">The Duration</string>
-    <string name="duration_over_a_year_L2">is over a</string>
-    <string name="duration_over_a_year_L3">year long!!</string>
+    <string name="duration_over_a_year">The Duration is over a year long!</string>
     <string name="str_Hours">Hours</string>
     <string name="str_Minutes">Minutes</string>
     <string name="str_Seconds">Seconds</string>
-
+    <string name="outputText">outputText</string>
+    <string name="outputMinutes">outputMinutes</string>
+    <string name="outputSeconds">outputSeconds</string>
 
     <string-array name="sizeUnits">
         <item>TB</item>

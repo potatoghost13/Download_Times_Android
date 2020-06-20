@@ -3,6 +3,7 @@ package com.example.download_times
 import android.app.Activity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 
@@ -16,9 +17,7 @@ class MainActivity : AppCompatActivity() {
         val defaultValue = 1
 
         //Setup UI with Ids.
-        val outputHoursText: TextView = findViewById(R.id.outputHours)
-        val outputMinutesText: TextView = findViewById(R.id.outputMinutes)
-        val outputSecondsText: TextView = findViewById(R.id.outputSeconds)
+        val outputText: TextView = findViewById(R.id.outputText)
         val userSizeText: TextView = findViewById(R.id.userSize)
         userSizeText.text = defaultValue.toString()
         val userSpeedText: TextView = findViewById(R.id.userSpeed)
@@ -52,9 +51,9 @@ class MainActivity : AppCompatActivity() {
             //Output
             //Years
             if (timeInSeconds >= 3.15E7) {
-                outputHoursText.text = getString(R.string.duration_over_a_year_L1)
-                outputMinutesText.text = getString(R.string.duration_over_a_year_L2)
-                outputSecondsText.text = getString(R.string.duration_over_a_year_L3)
+                outputText.text = getString(R.string.duration_over_a_year)
+                showHide(outputText)
+
             } else {
                 //Hours
                 val doubleHours: Double = (timeInSeconds.toDouble() / 3600)
@@ -67,15 +66,29 @@ class MainActivity : AppCompatActivity() {
                 val seconds = doubleSeconds.toInt()
 
                 //OutPut
-                outputHoursText.text = "$hours ${getString(R.string.str_Hours)},"
-                outputMinutesText.text = "$minutes ${getString(R.string.str_Minutes)},"
-                outputSecondsText.text = "$seconds ${getString(R.string.str_Seconds)}."
+                outputText.text = "$hours ${getString(R.string.str_Hours)}, " +
+                        "\n $minutes ${getString(R.string.str_Minutes)}, " +
+                        "\n $seconds ${getString(R.string.str_Seconds)}."
+                showHide(outputText)
             }
         }
     }
 }
 
 //Todo: Fix Layout but as a last Priority
+//Todo: Improve Layout
+//Todo: Correct Output Text function. Remove the three separate fields
+//Todo: Implement the more common Mbps as a download speed option.
+
+//Function to ShowHide Components
+fun showHide(view: View) {
+    if (view.visibility == View.VISIBLE) {
+        //view.visibility = View.INVISIBLE
+    } else {
+        view.visibility = View.VISIBLE
+    }
+}
+
 
 // Function To Convert User Input to Int.
 fun checkUserInput(activity: Activity, textView: TextView, defaultValue: Int): Int {
