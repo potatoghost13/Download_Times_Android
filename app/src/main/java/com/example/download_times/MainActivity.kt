@@ -76,8 +76,6 @@ class MainActivity : AppCompatActivity() {
 }
 
 //Todo: Fix Layout but as a last Priority
-//Todo: Improve Layout
-//Todo: Correct Output Text function. Remove the three separate fields
 //Todo: Implement the more common Mbps as a download speed option.
 
 //Function to ShowHide Components
